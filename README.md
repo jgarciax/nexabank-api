@@ -8,14 +8,14 @@ NexaBank API is a robust backend system developed with [NestJS](https://nestjs.c
 
 The project provides a solid architecture for handling clients, bank accounts, financial products, and secure transaction processing.
 
-## 🚀 Key Features
+## Key Features
 
 - **Transaction Processing:** Creation and validation of banking operations (debits and credits) with strict controls for insufficient funds and account validation.
 - **Balance Inquiry:** Real-time balance retrieval for active accounts linked to clients and their respective financial products.
 - **Transaction History:** Detailed account statements filtered by client and specific date ranges.
 - **Relational Database:** SQL database structure managed via **TypeORM** to ensure data integrity and relationships.
 
-## 🛠️ Technologies & Tools
+## Technologies & Tools
 
 - **Framework:** NestJS (Node.js)
 - **Language:** TypeScript
@@ -23,7 +23,7 @@ The project provides a solid architecture for handling clients, bank accounts, f
 - **Database:** MySQL
 - **Validation:** class-validator & class-transformer
 
-## 📋 Data Structure (Entities)
+## Data Structure (Entities)
 
 The system operates on a relational model that includes:
 - `Cliente`: Personal information (ID, full name, date of birth, gender, country).
