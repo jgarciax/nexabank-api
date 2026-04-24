@@ -2,97 +2,80 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# NexaBank API
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+NexaBank API is a robust backend system developed with [NestJS](https://nestjs.com/) and TypeScript, designed to manage the core banking operations of a financial institution. 
 
-## Description
+The project provides a solid architecture for handling clients, bank accounts, financial products, and secure transaction processing.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🚀 Key Features
 
-## Project setup
+- **Transaction Processing:** Creation and validation of banking operations (debits and credits) with strict controls for insufficient funds and account validation.
+- **Balance Inquiry:** Real-time balance retrieval for active accounts linked to clients and their respective financial products.
+- **Transaction History:** Detailed account statements filtered by client and specific date ranges.
+- **Relational Database:** SQL database structure managed via **TypeORM** to ensure data integrity and relationships.
+
+## 🛠️ Technologies & Tools
+
+- **Framework:** NestJS (Node.js)
+- **Language:** TypeScript
+- **ORM:** TypeORM
+- **Database:** MySQL
+- **Validation:** class-validator & class-transformer
+
+## 📋 Data Structure (Entities)
+
+The system operates on a relational model that includes:
+- `Cliente`: Personal information (ID, full name, date of birth, gender, country).
+- `Producto`: Catalog of financial products (interest rates, calculation methods, types).
+- `Cuenta`: An instance of a product acquired by a client, which tracks the current balance and account status.
+- `Transaccion`: Immutable record of every financial movement.
+- `CodigoOperacion`: Catalog of transaction types (e.g., deposits, withdrawals, debits, credits).
+
+## ⚙️ Local Environment Setup
+
+### 1. Prerequisites
+- [Node.js](https://nodejs.org/en/) installed.
+- MySQL database running (local or cloud).
+
+### 2. Install Dependencies
 
 ```bash
 $ npm install
 ```
 
-## Compile and run the project
+### 3. Environment Variables
+
+Make sure to create an `.env` file in the root of the project to set up your database credentials:
+
+```env
+DB_HOST=your_mysql_host
+DB_PORT=26368 # Or the port you are using
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_NAME=your_database_name
+```
+
+## 🏃 Running the Application
 
 ```bash
-# development
+# regular mode
 $ npm run start
 
-# watch mode
+# watch mode (Recommended for development)
 $ npm run start:dev
 
 # production mode
 $ npm run start:prod
 ```
 
-## Run tests
+## Main Endpoints
 
-```bash
-# unit tests
-$ npm run test
+All base endpoints are routed through the transactions controller:
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- `POST /transacciones/create`  
+  *Creates a transaction (e.g., deposit or withdrawal) and updates the target account's balance.*
+- `GET /transacciones/saldos`  
+  *Retrieves a general summary of all accounts, including client information, product details, and current balance.*
+- `POST /transacciones/historial`  
+  *Returns the transaction history for a specific client within a given date range.*
