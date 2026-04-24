@@ -69,13 +69,81 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Main Endpoints
+## API Reference
 
-All base endpoints are routed through the transactions controller:
+The base URL for all endpoints is `http://localhost:3000`.
 
-- `POST /transacciones/create`  
-  *Creates a transaction (e.g., deposit or withdrawal) and updates the target account's balance.*
-- `GET /transacciones/saldos`  
-  *Retrieves a general summary of all accounts, including client information, product details, and current balance.*
-- `POST /transacciones/historial`  
-  *Returns the transaction history for a specific client within a given date range.*
+---
+
+### Accounts — `/cuenta`
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/cuenta` | Returns all accounts with client and product information |
+| `GET` | `/cuenta/:id` | Returns a single account by ID, including its transaction history |
+| `GET` | `/cuenta/saldo` | Returns a summary of all accounts with balance, client name, product type, and interest rate |
+| `GET` | `/cuenta/codigos-operacion` | Returns the full catalog of operation codes (`SELECT * FROM codigos_operacion`) |
+| `PUT` | `/cuenta/:id` | Updates account fields (account number, status, balance) |
+| `DELETE` | `/cuenta/:id` | Deletes an account by ID |
+
+**PUT `/cuenta/:id` — Request body:**
+```json
+{
+  "numero_cuenta": "001-001-001",
+  "estatus": "ACTIVA",
+  "saldo": 5000
+}
+```
+*All fields are optional — only send what you want to update.*
+
+---
+
+### Transactions — `/transacciones`
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/transacciones/create` | Creates a transaction (debit or credit) and updates the account balance |
+| `POST` | `/transacciones/historial` | Returns the transaction history for a client within a date range |
+
+**POST `/transacciones/create` — Request body:**
+```json
+{
+  "numeroCuenta": "001-001-001",
+  "fecha": "2026-04-24",
+  "monto": 500,
+  "codigoOperacionId": 1
+}
+```
+
+**POST `/transacciones/historial` — Request body:**
+```json
+{
+  "clienteId": 1,
+  "fechaInicio": "2026-01-01",
+  "fechaFin": "2026-04-30"
+}
+```
+
+---
+
+### Response Format
+
+All endpoints return a consistent JSON structure:
+
+```json
+{
+  "codigo_respuesta": 0,
+  "descripcion_respuesta": "OK",
+  "data": { }
+}
+```
+
+| `codigo_respuesta` | Meaning |
+|--------------------|---------|
+| `0` | Success |
+| `1` | Resource not found |
+| `2` | Account inactive |
+| `3` | Invalid operation code |
+| `4` | Insufficient funds |
+| `5` | Invalid date range |
+| `99` | Internal server error |
