@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
   Put,
   Delete,
   Param,
@@ -32,20 +31,6 @@ export class CuentasController {
   @Get(':id')
   async obtenerPorId(@Param('id', ParseIntPipe) id: number) {
     return this.service.obtenerPorId(id);
-  }
-
-  @Post()
-  async crear(
-    @Body()
-    body: {
-      numero_cuenta: string;
-      estatus: string;
-      saldo: number;
-      clienteId: number;
-      productoId: number;
-    },
-  ) {
-    return this.service.crear(body);
   }
 
   @Put(':id')
