@@ -87,32 +87,6 @@ export class TransaccionesService {
     }
   }
 
-  async obtenerSaldos() {
-    try {
-      const cuentas = await this.cuentaRepo.find({
-        relations: ['cliente', 'producto'],
-      });
-
-      return {
-        codigo_respuesta: 0,
-        descripcion_respuesta: 'OK',
-        data: cuentas.map((c) => ({
-          numeroCuenta: c.numero_cuenta,
-          nombreCliente: c.cliente.nombre_completo,
-          tipoCuenta: c.producto.tipo_producto,
-          tasaInteres: c.producto.tasa_interes,
-          saldo: Number(c.saldo),
-          estatus: c.estatus,
-        })),
-      };
-    } catch {
-      return {
-        codigo_respuesta: 99,
-        descripcion_respuesta: 'Error obteniendo saldos',
-      };
-    }
-  }
-
   async obtenerHistorial(dto: FiltroTransaccionesDto) {
     try {
       if (dto.fechaInicio > dto.fechaFin) {
