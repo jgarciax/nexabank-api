@@ -22,6 +22,13 @@ export class TransaccionesService {
 
   async crear(dto: CreateTransaccionDto) {
     try {
+      if (!dto.monto || dto.monto <= 0) {
+        return {
+          codigo_respuesta: 6,
+          descripcion_respuesta: 'El monto debe ser mayor a cero',
+        };
+      }
+
       const cuenta = await this.cuentaRepo.findOne({
         where: { numero_cuenta: dto.numeroCuenta },
       });
