@@ -76,7 +76,7 @@ export class TransaccionesService {
 
       return {
         codigo_respuesta: 0,
-        descripcion_respuesta: 'OK',
+        descripcion_respuesta: 'Transacción realizada correctamente',
         id_transaccion: saved.id,
       };
     } catch {
@@ -110,7 +110,7 @@ export class TransaccionesService {
 
       return {
         codigo_respuesta: 0,
-        descripcion_respuesta: 'Transacción realizada correctamente',
+        descripcion_respuesta: 'Ok',
         data: data.map((t) => ({
           idTransaccion: t.id,
           numeroCuenta: t.cuenta.numero_cuenta,
